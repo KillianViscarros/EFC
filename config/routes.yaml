@@ -1,0 +1,27 @@
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
+
+homepage:
+    path: /
+    controller: App\Controller\HomeController::index
+
+questions_add:
+    path: /add
+    controller: App\Controller\QuestionController::add    
+
+questions_edit:
+    path: /edit/{id}
+    controller: App\Controller\QuestionController::edit
+    requirements:
+      id: '\d+' 
+
+questions_remove:
+    path: /remove/{id}
+    controller: App\Controller\QuestionController::remove
+    requirements:
+      id: '\d+' 

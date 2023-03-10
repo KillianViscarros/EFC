@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block content %}
+
+{% for question in questions %}
+{% if question.enjeuefc == 1  %}
+    {{ question.question}} <br>
+
+{% endif %}
+{% if question.enjeueit == 1  %}
+    {{ question.question}} <br>
+{% endif %}
+
+{% if question.enjeuec == 1  %}
+    {{ question.question}} <br>
+{% endif %}
+<br>
+{% endfor %}
+    <div class="container-fluid">
+        {# Titre de la page #}
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Listing</h1>
+            </div>
+        </div>
+
+        <div class="row alert alert-warning" role="alert">
+            <div class="col-xs-9 col-sm-10"></div>
+
+            <div class="col-xs-3 col-sm-2">
+                <a href="{{ path('questions_add') }}" role="button" class="btn btn-info text-right">
+                    <i class="fa fa-plus fa-fw"></i> Ajouter
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Question</th>
+                    <th scope="col">Enjeu EFC</th>
+                    <th scope="col">Enjeu EIT</th>
+                    <th scope="col">Enjeu EC</th>
+                    <th scope="col">{# Bouton d'action - Supprimer #}</th>
+                    <th scope="col">{# Bouton d'action - Modifier #}</th>
+                </tr>
+            </thead>
+    <tbody>
+    {% for question in questions %}
+
+        <tr>
+                    <th scope="row">
+                        {{ question.question }}
+                    </th>
+                    <td>
+                        {{ question.enjeuefc ? 'Oui' : 'Non' }}
+                    </td>
+                    <td>
+                        {{ question.enjeueit ? 'Oui' : 'Non' }}
+                    </td>
+                    <td>
+                       {{ question.enjeuec ? 'Oui' : 'Non' }}
+
+                    </td>
+                    <td>
+                        <a href="{{ path('questions_remove', {'id': question.id}) }}" role="button" class="btn btn-danger">Supprimer</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('questions_edit', {'id': question.id}) }}" role="button" class="btn btn-info">Modifier</a>
+                    </td>
+                </tr>
+    {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
