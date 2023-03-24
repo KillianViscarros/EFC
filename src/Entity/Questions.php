@@ -18,13 +18,14 @@ class Questions
     private ?string $question = null;
 
     #[ORM\Column]
-    private ?bool $enjeu_efc = null;
+    private ?int $enjeu_efc = null;
 
     #[ORM\Column]
-    private ?bool $enjeu_eit = null;
+    private ?int $enjeu_eit = null;
 
     #[ORM\Column]
-    private ?bool $enjeu_ec = null;
+    private ?int $enjeu_ec = null;
+
 
     public function getId(): ?int
     {
@@ -43,39 +44,40 @@ class Questions
         return $this;
     }
 
-    public function isEnjeuEfc(): ?bool
+    public function getEnjeuEfc(): ?int
     {
         return $this->enjeu_efc;
     }
 
-    public function setEnjeuEfc(bool $enjeu_efc): self
+    public function setEnjeuEfc(int $enjeu_efc): self
     {
         $this->enjeu_efc = $enjeu_efc;
 
         return $this;
     }
 
-    public function isEnjeuEit(): ?bool
+    public function getEnjeuEit(): ?int
     {
         return $this->enjeu_eit;
     }
 
-    public function setEnjeuEit(bool $enjeu_eit): self
+    public function setEnjeuEit(int $enjeu_eit): self
     {
         $this->enjeu_eit = $enjeu_eit;
 
         return $this;
     }
 
-    public function isEnjeuEc(): ?bool
+    public function getEnjeuEc(): ?int
     {
         return $this->enjeu_ec;
     }
 
-    public function setEnjeuEc(bool $enjeu_ec): self
+    public function setEnjeuEc(int $enjeu_ec): self
     {
         $this->enjeu_ec = $enjeu_ec;
 
         return $this;
     }
+
 }

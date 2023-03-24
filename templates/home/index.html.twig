@@ -5,16 +5,16 @@
 {% block content %}
 
 {% for question in questions %}
-{% if question.enjeuefc == 1  %}
-    {{ question.question}} <br>
+{% if question.enjeuefc >= 1  %}
+    {{ question.question}} un point EFC <br>
 
 {% endif %}
-{% if question.enjeueit == 1  %}
-    {{ question.question}} <br>
+{% if question.enjeueit >= 1  %}
+    {{ question.question}} un point EIT<br>
 {% endif %}
 
-{% if question.enjeuec == 1  %}
-    {{ question.question}} <br>
+{% if question.enjeuec >= 1  %}
+    {{ question.question}} un point EC<br>
 {% endif %}
 <br>
 {% endfor %}

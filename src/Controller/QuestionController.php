@@ -80,9 +80,9 @@ class QuestionController extends AbstractController
         {
             echo'lanta';
             $formData->setQuestion($form->get('question')->getData());
-            $formData->isEnjeuEFC($form->get('enjeu_efc')->getData());
-            $formData->isEnjeuEIT($form->get('enjeu_eit')->getData());
-            $formData->isEnjeuEC($form->get('enjeu_ec')->getData());
+            $formData->setEnjeuEFC($form->get('enjeu_efc')->getData());
+            $formData->setEnjeuEIT($form->get('enjeu_eit')->getData());
+            $formData->setEnjeuEC($form->get('enjeu_ec')->getData());
             
             $manager->persist($formData);
             $manager->flush();

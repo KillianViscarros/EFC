@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class QuestionAddType extends AbstractType
@@ -17,17 +17,24 @@ class QuestionAddType extends AbstractType
             ->add('question', TextType::class, [
                 'label' => 'Question'
             ])
-            ->add('enjeu_efc', CheckboxType::class, [
+            ->add('enjeu_efc', NumberType::class, [
                 'label' => 'EFC',
-                'required' => false
+                'required' => false,
+                'invalid_message' => 'Vous devez rentrer un nombre',
+                'attr'=>['min'=>0, 'max'=>100, 'step'=>0.1]
             ])
-            ->add('enjeu_eit', CheckboxType::class, [
+            ->add('enjeu_eit', NumberType::class, [
                 'label' => 'EIT',
-                'required' => false
+                'required' => false,
+                'invalid_message' => 'Vous devez rentrer un nombre',
+                'attr'=>['min'=>0, 'max'=>100, 'step'=>0.1]
+
             ])
-            ->add('enjeu_ec', CheckboxType::class, [
+            ->add('enjeu_ec', NumberType::class, [
                 'label' => 'EC',
-                'required' => false
+                'required' => false,
+                'invalid_message' => 'Vous devez rentrer un nombre',
+                'attr'=>['min'=>0, 'max'=>100, 'step'=>0.1]
             ])
             ->add('submit', SubmitType::class, ['label' => 'Ajouter']);
         ;
