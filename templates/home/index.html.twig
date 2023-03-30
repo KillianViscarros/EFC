@@ -4,20 +4,69 @@
 
 {% block content %}
 
+<form method="post" >
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Question</th>
+                    <th scope="col">Cochez la case correspondant à votre réponse <br>
+0 : Pas du tout d'accord<br>
+1 : Plutôt pas d'accord<br>
+2 : Plutôt d'accord<br>
+3 : Tout à fait d'accord</th>
+
+                </tr>
+            </thead>
+    <tbody>
+    {% for question in idquestions %}
+
+        <tr>
+            <th scope="row">
+                    <label>{{ question.question }}</label>
+            </th>
+            <td>
+                <select name="question_{{ question.id }}">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </td>
+        
+    {% endfor %}
+
+    </tr>
+            </tbody>
+        </table>
+        <button type="submit">Envoyer</button
+</form>
+
+    <p>Total EFC : {{ totalEFC }}</p>
+    <p>Total EIT : {{ totalEIT }}</p>
+    <p>Total EC : {{ totalEC }}</p>
+
+
+{#
 {% for question in questions %}
 {% if question.enjeuefc >= 1  %}
-    {{ question.question}} un point EFC <br>
+    {{ question.question }} {{question.enjeuefc}} <br>
 
 {% endif %}
+
 {% if question.enjeueit >= 1  %}
-    {{ question.question}} un point EIT<br>
+    {{ question.question}} {{question.enjeueit}}<br>
 {% endif %}
 
 {% if question.enjeuec >= 1  %}
-    {{ question.question}} un point EC<br>
+    {{ question.question}} {{question.enjeuec}}<br>
 {% endif %}
 <br>
 {% endfor %}
+#}
+
+
+
     <div class="container-fluid">
         {# Titre de la page #}
         <div class="row">
@@ -60,13 +109,13 @@
                         {{ question.question }}
                     </th>
                     <td>
-                        {{ question.enjeuefc ? 'Oui' : 'Non' }}
+                        {{ question.enjeuefc }}
                     </td>
                     <td>
-                        {{ question.enjeueit ? 'Oui' : 'Non' }}
+                        {{ question.enjeueit }}
                     </td>
                     <td>
-                       {{ question.enjeuec ? 'Oui' : 'Non' }}
+                       {{ question.enjeuec }}
 
                     </td>
                     <td>

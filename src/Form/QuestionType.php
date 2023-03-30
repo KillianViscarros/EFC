@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class QuestionType extends AbstractType
@@ -14,23 +14,30 @@ class QuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('question', TextType::class, [
-                'label' => 'Question '
-            ])
-            ->add('enjeu_efc', CheckboxType::class, [
-                'label' => 'EFC ',
-                'required' => false
-            ])
-            ->add('enjeu_eit', CheckboxType::class, [
-                'label' => 'EIT ',
-                'required' => false
-            ])
-            ->add('enjeu_ec', CheckboxType::class, [
-                'label' => 'EC ',
-                'required' => false
-            ])
-            ->add('submit', SubmitType::class, ['label' => 'Mettre à jour']);
-        ;
+        ->add('question', TextType::class, [
+            'label' => 'Question'
+        ])
+        ->add('enjeu_efc', NumberType::class, [
+            'label' => 'EFC',
+            'required' => false,
+            'invalid_message' => 'Vous devez rentrer un nombre',
+            'attr'=>['min'=>0, 'max'=>100, 'step'=>0.1]
+        ])
+        ->add('enjeu_eit', NumberType::class, [
+            'label' => 'EIT',
+            'required' => false,
+            'invalid_message' => 'Vous devez rentrer un nombre',
+            'attr'=>['min'=>0, 'max'=>100, 'step'=>0.1]
+
+        ])
+        ->add('enjeu_ec', NumberType::class, [
+            'label' => 'EC',
+            'required' => false,
+            'invalid_message' => 'Vous devez rentrer un nombre',
+            'attr'=>['min'=>0, 'max'=>100, 'step'=>0.1]
+        ])
+        ->add('submit', SubmitType::class, ['label' => 'Ajouter']);
+    ;
     }
 
 
