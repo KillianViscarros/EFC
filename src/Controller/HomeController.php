@@ -25,27 +25,38 @@ class HomeController extends AbstractController
         $totalEFC = 0;
         $totalEIT = 0;
         $totalEC = 0;
+
+        $totalEnjeuxEFC = 0;
+        $totalEnjeuxEIT = 0;
+        $totalEnjeuxEC = 0;
+
         
         if ($request->isMethod('POST')) {
             foreach ($questions as $idquestion) {
                 if ($idquestion->getEnjeuefc() >=0 ) {
+
                     $value = $request->request->get('question_'.$idquestion->getId(), 0);
-                    $totalEFC += $value * $idquestion->getEnjeuefc();
-                    echo  $idquestion->getEnjeuefc() . " " . $totalEFC . " efc <br>"; 
+                    $totalEFC += ($value * $idquestion->getEnjeuefc())*100;
+                    $totalEnjeuxEFC += $idquestion->getEnjeuefc();
                 }
                 if ($idquestion->getEnjeueit() >=0) {
+
                     $value = $request->request->get('question_'.$idquestion->getId(), 0);
-                    $totalEIT += $value * $idquestion->getEnjeueit();
-                    echo  $idquestion->getEnjeueit() . " " . $totalEIT ." eit <br>";
+                    $totalEIT += ($value * $idquestion->getEnjeueit())*100;
+                    $totalEnjeuxEIT += $idquestion->getEnjeueit();
                    
                 }
                 if ($idquestion->getEnjeuec() >=0 ) {
                     $value = $request->request->get('question_'.$idquestion->getId(), 0);
-                    $totalEC += $value * $idquestion->getEnjeuec();
-                    echo  $idquestion->getEnjeuec() . " " . $totalEC  . " ec <br>";
+                    $totalEC += ($value * $idquestion->getEnjeuec())*100;
+                    $totalEnjeuxEC += $idquestion->getEnjeuec();
                    
                 }
             }
+            $totalEnjeux = $totalEnjeuxEFC + $totalEnjeuxEIT + $totalEnjeuxEC;
+            $totalEFC = $totalEFC / ($totalEnjeuxEFC * 3);
+            $totalEIT = $totalEIT / ($totalEnjeuxEIT * 3);
+            $totalEC = $totalEC / ($totalEnjeuxEC * 3);
         }
 
 

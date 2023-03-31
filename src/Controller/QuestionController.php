@@ -83,7 +83,6 @@ class QuestionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            echo'lanta';
             $formData->setQuestion($form->get('question')->getData());
             $formData->setEnjeuEFC($form->get('enjeu_efc')->getData());
             $formData->setEnjeuEIT($form->get('enjeu_eit')->getData());
