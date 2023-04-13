@@ -3,6 +3,8 @@
 
 
 {% block content %}
+{% if not app.user  %}
+{% else %}
 
 <form method="post" >
     <div class="container-fluid">
@@ -45,7 +47,7 @@
     <p>Total EFC : {{ totalEFC }}</p>
     <p>Total EIT : {{ totalEIT }}</p>
     <p>Total EC : {{ totalEC }}</p>
-
+{% endif %}
 
 {#
 {% for question in questions %}
@@ -66,7 +68,7 @@
 #}
 
 
-
+{% if is_granted('ROLE_ADMIN') %}
     <div class="container-fluid">
         {# Titre de la page #}
         <div class="row">
@@ -129,7 +131,7 @@
             </tbody>
         </table>
 
-
+{% endif %}
 
 
 {% endblock %}

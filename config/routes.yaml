@@ -25,3 +25,4 @@ questions_remove:
     controller: App\Controller\QuestionController::remove
     requirements:
       id: '\d+' 
+

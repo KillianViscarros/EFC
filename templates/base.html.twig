@@ -10,6 +10,50 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" int
     {% endblock %}
     <title>Blog - {% block title %}{% endblock %}</title>
 
+
+
+<body>
+	<body>
+		<div class="main">
+			{% if not app.user  %}
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<ul class="navbar-nav">
+					<li class="nav-item active">
+						<a class="navbar-brand" href="{{ path('app_login') }}"><i class="align-middle mr-1" data-feather="pie-chart"></i> Se connecter <span class="sr-only">(current)</span></a>
+					</li>
+                    <li class="nav-item">
+						<a class="navbar-brand" href="{{ path('app_register') }}"><i class="align-middle mr-1" data-feather="settings"></i>S'inscrire</a>
+					</li>
+				</ul>  
+              </a>
+			</nav>
+			{% else %}
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<ul class="navbar-nav">
+
+					
+					{% if is_granted('ROLE_ADMIN') %}
+
+					{% endif %}
+				</ul>
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						<li class="nav-item dropdown"></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
+								<img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded mr-1" alt="  "/>
+								<span class="text-dark">{{app.user.email}}</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="{{ path('app_logout') }}">
+									Déconnexion
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav> 
+			{% endif %}
     {% block content %}{% endblock %}
     </div>
     
