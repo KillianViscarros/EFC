@@ -28,6 +28,10 @@ class Score
     #[ORM\Column]
     private ?float $total = null;
 
+    #[ORM\ManyToOne(inversedBy: 'scores')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
 
 
 
@@ -84,6 +88,18 @@ class Score
     public function setTotal(float $total): self
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
