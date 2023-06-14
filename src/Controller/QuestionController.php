@@ -24,7 +24,7 @@ class QuestionController extends AbstractController
     }
 
     /**
-     * Modification d'un article
+     * Modification d'une question
      * 
      * @param   int     $id     Identifiant de l'article
      * 
@@ -65,7 +65,7 @@ class QuestionController extends AbstractController
 
 
     /**
-     * Modification d'un article
+     * Ajout d'une question
      * 
      * @param   int     $id     Identifiant de l'article
      * 

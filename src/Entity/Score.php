@@ -32,6 +32,9 @@ class Score
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $entreprise = null;
+
 
 
 
@@ -100,6 +103,18 @@ class Score
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?string
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(string $entreprise): self
+    {
+        $this->entreprise = $entreprise;
 
         return $this;
     }

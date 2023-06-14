@@ -38,6 +38,7 @@ class HomeController extends AbstractController
 
         
         if ($request->isMethod('POST')) {
+            $entreprise = $request->request->get('entreprise');
             foreach ($questions as $idquestion) {
                 if ($idquestion->getEnjeuefc() >=0 ) {
 
@@ -69,6 +70,7 @@ class HomeController extends AbstractController
 
 
             $score = new Score();
+            $score->setEntreprise($entreprise);
             $score->setEfc($totalEFC);
             $score->setEit($totalEIT);
             $score->setEc($totalEC);

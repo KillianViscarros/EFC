@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+{% if app.user is not null and not is_granted('ROLE_ADMIN') %}
+
     <h1>Historique des Scores</h1>
     <div class="container-fluid">
         <table class="table">
@@ -19,7 +21,7 @@
         {% if score.user.id == app.user.id %}
         <tr>
                     <th scope="row">
-                        
+                        {{ score.entreprise }} 
                     </th>
                     <td>
                         {{ score.efc }} %
@@ -39,5 +41,41 @@
     {% endfor %}
             </tbody>
         </table>
+
+{% endif %}
+
+{% if is_granted('ROLE_ADMIN') %}
+<h1>Historique des Scores</h1>
+
+{% for score in scores %}
+    <details>
+        <summary>{{ score.user.email }}</summary>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Utilisateur</th>
+                    <th scope="col">Entreprise</th>
+                    <th scope="col">Enjeu EFC</th>
+                    <th scope="col">Enjeu EIT</th>
+                    <th scope="col">Enjeu EC</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ score.user.email }}</td>
+                    <td>{{ score.entreprise }}</td>
+                    <td>{{ score.efc }} %</td>
+                    <td>{{ score.eit }} %</td>
+                    <td>{{ score.ec }} %</td>
+                    <td>{{ score.total }} %</td>
+                </tr>
+            </tbody>
+        </table>
+    </details>
+{% endfor %}
+            </tbody>
+        </table>
+{% endif %}
 {% endblock %}
 

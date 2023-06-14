@@ -30,7 +30,9 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" int
 			{% else %}
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<ul class="navbar-nav">
-
+					<li class="nav-item active">
+						<a class="navbar-brand" href="{{ path('homepage') }}"><i class="align-middle mr-1" data-feather="pie-chart"></i> Faire le questionnaire <span class="sr-only">(current)</span></a>
+					</li>
 					
 					{% if is_granted('ROLE_ADMIN') %}
 
