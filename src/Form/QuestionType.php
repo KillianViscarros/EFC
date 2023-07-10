@@ -21,20 +21,35 @@ class QuestionType extends AbstractType
             'label' => 'EFC',
             'required' => false,
             'invalid_message' => 'Vous devez rentrer un nombre',
-            'attr'=>['min'=>0, 'max'=>100, 'step'=>0.1]
+            'html5' => true,  // Ajoutez cette ligne
+            'attr'=>[
+                'min'=>0, 
+                'max'=>100, 
+                'step'=>0.1
+            ]
         ])
         ->add('enjeu_eit', NumberType::class, [
             'label' => 'EIT',
             'required' => false,
             'invalid_message' => 'Vous devez rentrer un nombre',
-            'attr'=>['min'=>0, 'max'=>100, 'step'=>0.1]
+            'html5' => true,  // Ajoutez cette ligne
+            'attr'=>[
+                'min'=>0, 
+                'max'=>100, 
+                'step'=>0.1
+            ]
 
         ])
         ->add('enjeu_ec', NumberType::class, [
             'label' => 'EC',
             'required' => false,
             'invalid_message' => 'Vous devez rentrer un nombre',
-            'attr'=>['min'=>0, 'max'=>100, 'step'=>0.1]
+            'html5' => true,  // Ajoutez cette ligne
+            'attr'=>[
+                'min'=>0, 
+                'max'=>100, 
+                'step'=>0.1
+            ]
         ])
         ->add('submit', SubmitType::class, ['label' => 'Ajouter']);
     ;

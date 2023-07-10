@@ -47,6 +47,48 @@
 {% if is_granted('ROLE_ADMIN') %}
 <h1>Historique des Scores</h1>
 
+
+{% set users = {} %}
+
+{% for score in scores %}
+    {% set users = users|merge({(score.user.email): null}) %}
+{% endfor %}
+
+{% for user, _ in users %}
+    {% set userScores = scores|filter(score => score.user.email == user) %}
+    {# Ici, vous pouvez faire ce que vous voulez avec les scores de chaque utilisateur unique #}
+    <details>
+        <summary>{{ user }}</summary>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Utilisateur</th>
+                    <th scope="col">Entreprise</th>
+                    <th scope="col">Enjeu EFC</th>
+                    <th scope="col">Enjeu EIT</th>
+                    <th scope="col">Enjeu EC</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in userScores %}
+                    <tr>
+                        <td>{{ score.user.email }}</td>
+                        <td>{{ score.entreprise }}</td>
+                        <td>{{ score.efc }} %</td>
+                        <td>{{ score.eit }} %</td>
+                        <td>{{ score.ec }} %</td>
+                        <td>{{ score.total }} %</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </details>
+{% endfor %}
+
+{#
+
+        <h1>Historique des Scores</h1>
 {% for score in scores %}
     <details>
         <summary>{{ score.user.email }}</summary>
@@ -62,20 +104,35 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>{{ score.user.email }}</td>
-                    <td>{{ score.entreprise }}</td>
-                    <td>{{ score.efc }} %</td>
-                    <td>{{ score.eit }} %</td>
-                    <td>{{ score.ec }} %</td>
-                    <td>{{ score.total }} %</td>
-                </tr>
+                {% set user_scores = score.user %}
+                {% if user_scores|length > 1 %}
+                {{score.user}}
+                    {% for user_score in user_scores %}
+                        <tr>
+                            <td>{{ user_score.user.email }}</td>
+                            <td>{{ user_score.entreprise }}</td>
+                            <td>{{ user_score.efc }} %</td>
+                            <td>{{ user_score.eit }} %</td>
+                            <td>{{ user_score.ec }} %</td>
+                            <td>{{ user_score.total }} %</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td>{{ score.user.email }}</td>
+                        <td>{{ score.entreprise }}</td>
+                        <td>{{ score.efc }} %</td>
+                        <td>{{ score.eit }} %</td>
+                        <td>{{ score.ec }} %</td>
+                        <td>{{ score.total }} %</td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
     </details>
 {% endfor %}
-            </tbody>
-        </table>
+#}
+
 {% endif %}
 {% endblock %}
 

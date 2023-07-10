@@ -7,6 +7,21 @@
     <div class="container center">
         <h1>Ajouter</h1>
     {{ form(form) }}
+
+<script>
+document.getElementById('question_add_enjeu_efc').addEventListener('input', function(e) {
+    if (e.target.value < 0) e.target.value = 0;
+});
+document.getElementById('question_add_enjeu_eit').addEventListener('input', function(e) {
+    if (e.target.value < 0) e.target.value = 0;
+});
+document.getElementById('question_add_enjeu_ec').addEventListener('input', function(e) {
+    if (e.target.value < 0) e.target.value = 0;
+});
+</script>
+
+
+
     </div>    
 
 {% endblock %}
