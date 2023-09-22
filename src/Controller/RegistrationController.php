@@ -16,6 +16,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
+    /**
+     * Méthode pour inscrire un utilisateur normal
+     * 
+     * @return Response
+     */
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UsersAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
@@ -24,7 +29,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            // Encodage du mot de passe
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -34,8 +39,8 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
+            // Authentification de l'utilisateur après son inscription
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
@@ -48,7 +53,11 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-
+    /**
+     * Méthode pour inscrire un administrateur
+     * 
+     * @return Response
+     */
     #[Route('/register/admin', name: 'app_register_admin')]
     public function registerAdmin(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UsersAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
@@ -57,18 +66,19 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            // Encodage du mot de passe
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
+            // Attribution du rôle d'administrateur
             $user->setRoles(['ROLE_ADMIN']);
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+            // Redirection vers la page d'accueil après l'inscription
             return $this->redirectToRoute('homepage'); // Remplacez 'home' par le nom de la route de la page souhaitée
         }
 

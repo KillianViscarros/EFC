@@ -6,8 +6,7 @@
 {% if not app.user  %}
 {% endif %}
 
-{% if app.user is not null and not is_granted('ROLE_ADMIN') %}
-
+{% if app.user is not null and not is_granted('ROLE_ADMIN') %} {# Si l'utilisateur est connecté et n'est pas un administrateur #}
 <form method="post" >
     <div class="container-fluid">
         <table class="table">
@@ -15,70 +14,47 @@
                 <tr>
                     <th scope="col">Question</th>
                     <th scope="col">Cochez la case correspondant à votre réponse <br>
-0 : Pas du tout d'accord<br>
-1 : Plutôt pas d'accord<br>
-2 : Plutôt d'accord<br>
-3 : Tout à fait d'accord</th>
-
+                        0 : Pas du tout d'accord<br>
+                        1 : Plutôt pas d'accord<br>
+                        2 : Plutôt d'accord<br>
+                        3 : Tout à fait d'accord
+                    </th>
                 </tr>
             </thead>
-    <tbody>
-    <tr>
-        <th>
-        <label for="entreprise">Nom de l'entreprise :</label>
-        </th>
-        <td>
-        <input type="text" id="entreprise" name="entreprise">
-        </td>
-    </tr>
-    {% for question in idquestions %}
+            <tbody>
+                <tr>
+                    <th>
+                    <label for="entreprise">Nom de l'entreprise :</label>
+                    </th>
+                    <td>
+                    <input type="text" id="entreprise" name="entreprise">
+                    </td>
+                </tr>
+    {% for question in idquestions %} {# Pour chaque question de la base de données #}
 
-        <tr>
-            <th scope="row">
-                    <label>{{ question.question }}</label>
-            </th>
-            <td>
-                <select name="question_{{ question.id }}">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </td>
+                <tr>
+                    <th scope="row">
+                            <label>{{ question.question }}</label> {# affichage de la question #}
+                    </th>
+                    <td>
+                        <select name="question_{{ question.id }}">{# récupération de l'id de la question #}
+                            <option value="0">0</option> {# valeur Pas du tout d'accord #}
+                            <option value="1">1</option> {# valeur Plutôt pas d'accord #}
+                            <option value="2">2</option> {# valeur Plutôt d'accord #}
+                            <option value="3">3</option> {# valeur Tout à fait d'accord #}
+                        </select>
+                    </td>
         
     {% endfor %}
-
-    </tr>
+                </tr>
             </tbody>
         </table>
-        <button type="submit">Envoyer</button>
+    <button type="submit">Envoyer</button>
 </form>
-
-
 {% endif %}
 
-{#
-{% for question in questions %}
-{% if question.enjeuefc >= 1  %}
-    {{ question.question }} {{question.enjeuefc}} <br>
-
-{% endif %}
-
-{% if question.enjeueit >= 1  %}
-    {{ question.question}} {{question.enjeueit}}<br>
-{% endif %}
-
-{% if question.enjeuec >= 1  %}
-    {{ question.question}} {{question.enjeuec}}<br>
-{% endif %}
-<br>
-{% endfor %}
-#}
-
-
-{% if is_granted('ROLE_ADMIN') %}
+{% if is_granted('ROLE_ADMIN') %} {# Si l'utilisateur est connecté en temps qu'administrateur #}
     <div class="container-fluid">
-        {# Titre de la page #}
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Liste des questions</h1>
@@ -87,22 +63,18 @@
 
         <div class="row alert alert-warning" role="alert">
             <div class="col-xs-9 col-sm-10"></div>
-
             <div class="col-xs-3 col-sm-2">
-                <a href="{{ path('app_register_admin') }}" role="button" class="btn btn-info text-right">
+                <a href="{{ path('app_register_admin') }}" role="button" class="btn btn-info text-right"> {# bouton ajout d'administrateur #}
                     <i class="fa fa-plus fa-fw"></i> Ajouter un administrateur
                 </a>
-                <a href="{{ path('questions_add') }}" role="button" class="btn btn-info text-right">
+                <a href="{{ path('questions_add') }}" role="button" class="btn btn-info text-right"> {# bouton ajout de question #}
                     <i class="fa fa-plus fa-fw"></i> Ajouter une question
                 </a>
             </div>
         </div>
     </div>
 
-
-
-
-    <div class="container-fluid">
+    <div class="container-fluid"> {# Tableau des questions #}
         <table class="table">
             <thead>
                 <tr>
@@ -114,12 +86,11 @@
                     <th scope="col">{# Bouton d'action - Modifier #}</th>
                 </tr>
             </thead>
-    <tbody>
-    {% for question in questions %}
-
-        <tr>
-                    <th scope="row">
-                        {{ question.question }}
+            <tbody>
+            {% for question in questions %} {# Pour chaque question de la base de données #}
+                <tr>
+                    <th scope="row">  {# affichage des pondération pour chaque question #}
+                        {{ question.question }} 
                     </th>
                     <td>
                         {{ question.enjeuefc }}
@@ -128,8 +99,7 @@
                         {{ question.enjeueit }}
                     </td>
                     <td>
-                       {{ question.enjeuec }}
-
+                        {{ question.enjeuec }}
                     </td>
                     <td>
                         <a href="{{ path('questions_remove', {'id': question.id}) }}" role="button" class="btn btn-danger">Supprimer</a>
@@ -138,15 +108,13 @@
                         <a href="{{ path('questions_edit', {'id': question.id}) }}" role="button" class="btn btn-info">Modifier</a>
                     </td>
                 </tr>
-    {% endfor %}
+            {% endfor %}
             </tbody>
         </table>
+    </div>
 
 {% endif %}
-
-
 {% endblock %}
 
 {% block stylesheets %}
-
 {% endblock %}

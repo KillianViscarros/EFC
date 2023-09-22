@@ -15,6 +15,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" int
 <body>
 	<body>
 		<div class="main">
+		    <!-- Si l'utilisateur n'est pas connecté, affiche les options de connexion et d'inscription -->
 			{% if not app.user  %}
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<ul class="navbar-nav">
@@ -27,14 +28,15 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" int
 				</ul>  
               </a>
 			</nav>
+			<!-- Si l'utilisateur est connecté, affiche les options liées à son compte -->
 			{% else %}
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<ul class="navbar-nav">
 					<li class="nav-item active">
 						<a class="navbar-brand" href="{{ path('homepage') }}"><i class="align-middle mr-1" data-feather="pie-chart"></i> Faire le questionnaire <span class="sr-only">(current)</span></a>
 					</li>
-					
-					{% if is_granted('ROLE_ADMIN') %}
+            <!-- Si l'utilisateur a le rôle d'administrateur, des options supplémentaires peuvent être ajoutées ici -->					
+			{% if is_granted('ROLE_ADMIN') %}
 
 					{% endif %}
 				</ul>

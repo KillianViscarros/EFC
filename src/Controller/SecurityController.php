@@ -9,24 +9,32 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    /**
+     * Méthode pour gérer la connexion des utilisateurs.
+     * 
+     * @return Response
+     */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
-        // get the login error if there is one
+       
+        // Récupération de l'erreur de connexion, s'il y en a une.
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+        // Récupération du dernier nom d'utilisateur saisi par l'utilisateur.
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        // Affichage de la page de connexion avec les données nécessaires.
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
              'error' => $error
             ]);
     }
 
+    /**
+     * Méthode pour gérer la déconnexion des utilisateurs.
+     * 
+     * Cette méthode ne doit pas contenir de logique car elle sera interceptée par le mécanisme de déconnexion de Symfony.
+     */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {

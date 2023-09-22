@@ -1,19 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article{% endblock %}
+{% block title %}Modifier{% endblock %}
 
 {% block content %}
-
-
-
-
-
-
     <div class="container center">
         <h1>Modifier </h1>
-    {{ form(form) }}
+    {{ form(form) }} {# Appel du formulaire src/Form/QuestionType.php #}
     </div>    
-
 {% endblock %}
 
 {% block stylesheets %}

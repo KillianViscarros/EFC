@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}S'inscire{% endblock %}
 
 {% block content %}
 <section class="container my-3">
     <div class="row">
         <div class="col">
             <h1>Inscription</h1>
+  {# Début du formulaire d'inscription. "registrationFormType.php" #}
             {{ form_start(registrationForm) }}
                 {{ form_row(registrationForm.email, {
                     label: 'Email'

@@ -21,7 +21,7 @@ class QuestionType extends AbstractType
             'label' => 'EFC',
             'required' => false,
             'invalid_message' => 'Vous devez rentrer un nombre',
-            'html5' => true,  // Ajoutez cette ligne
+            'html5' => true,  
             'attr'=>[
                 'min'=>0, 
                 'max'=>100, 
@@ -32,7 +32,7 @@ class QuestionType extends AbstractType
             'label' => 'EIT',
             'required' => false,
             'invalid_message' => 'Vous devez rentrer un nombre',
-            'html5' => true,  // Ajoutez cette ligne
+            'html5' => true,  
             'attr'=>[
                 'min'=>0, 
                 'max'=>100, 
@@ -44,7 +44,7 @@ class QuestionType extends AbstractType
             'label' => 'EC',
             'required' => false,
             'invalid_message' => 'Vous devez rentrer un nombre',
-            'html5' => true,  // Ajoutez cette ligne
+            'html5' => true,  
             'attr'=>[
                 'min'=>0, 
                 'max'=>100, 

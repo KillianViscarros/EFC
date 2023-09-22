@@ -34,13 +34,14 @@ class QuestionController extends AbstractController
     public function edit( Request $request, int $id, ManagerRegistry $doctrine): Response
     {
         $formData = new Questions();
-
+        // Récupération de la question à modifier
         $question = $this->questionsRepository->find($id);
         $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
-
+        // Traitement du formulaire
         if ($form->isSubmitted() && $form->isValid())
         {
+            // ... (mise à jour des données de la question)
             $formData->setQuestion($form->get('question')->getData());
             $formData->setEnjeuEFC($form->get('enjeu_efc')->getData());
             $formData->setEnjeuEIT($form->get('enjeu_eit')->getData());
@@ -80,9 +81,10 @@ class QuestionController extends AbstractController
         $form->handleRequest($request);
 
 
-
+        // Traitement du formulaire
         if ($form->isSubmitted() && $form->isValid())
         {
+            // ... (création de la nouvelle question)
             $formData->setQuestion($form->get('question')->getData());
             $formData->setEnjeuEFC($form->get('enjeu_efc')->getData());
             $formData->setEnjeuEIT($form->get('enjeu_eit')->getData());

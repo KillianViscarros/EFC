@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-{% if app.user is not null and not is_granted('ROLE_ADMIN') %}
+{% if app.user is not null and not is_granted('ROLE_ADMIN') %} {# Si l'utilisateur est connecté et n'est pas un administrateur #}
 
     <h1>Historique des Scores</h1>
     <div class="container-fluid">
@@ -12,51 +12,47 @@
                     <th scope="col">Enjeu EFC</th>
                     <th scope="col">Enjeu EIT</th>
                     <th scope="col">Enjeu EC</th>
-                    <th scope="col">Total</th>
-
                 </tr>
             </thead>
     <tbody>
-    {% for score in scores %}
-        {% if score.user.id == app.user.id %}
+    {% for score in scores %} {# Appel de tous les scores existant dans la bdd #}
+        {% if score.user.id == app.user.id %} {# Si l'id dans la table utilisateur est égal à l'id utilisateur dans la table des scores #}
         <tr>
                     <th scope="row">
-                        {{ score.entreprise }} 
+                        {{ score.entreprise }}  {# affichage nom d'entreprise #}
                     </th>
                     <td>
-                        {{ score.efc }} %
+                        {{ score.efc }} % {# affichage score EFC #}
                     </td>
                     <td>
-                        {{ score.eit }} %
+                        {{ score.eit }} % {# affichage score EIT #}
                     </td>
                     <td>
-                       {{ score.ec }} %
-
-                    </td>
-                    <td>
-                        {{ score.total }} %
+                       {{ score.ec }} % {# affichage score EC #}
                     </td>
                 </tr>
         {% endif %}
     {% endfor %}
             </tbody>
         </table>
-
 {% endif %}
 
-{% if is_granted('ROLE_ADMIN') %}
+{% if is_granted('ROLE_ADMIN') %} {# Si l'utilisateur est connecté en administrateur #}
 <h1>Historique des Scores</h1>
 
+{# Initialisation d'un tableau vide pour stocker les utilisateurs uniques #}
+{% set users = {} %} 
 
-{% set users = {} %}
-
-{% for score in scores %}
-    {% set users = users|merge({(score.user.email): null}) %}
+{# Boucle sur tous les scores pour extraire les emails des utilisateurs uniques #}
+{% for score in scores %}  
+    {% set users = users|merge({(score.user.email): null}) %} 
 {% endfor %}
 
+{# Boucle sur chaque utilisateur unique #}
 {% for user, _ in users %}
+{# Filtrage des scores pour obtenir uniquement ceux de l'utilisateur actuel #}
     {% set userScores = scores|filter(score => score.user.email == user) %}
-    {# Ici, vous pouvez faire ce que vous voulez avec les scores de chaque utilisateur unique #}
+{# Affichage des scores de l'utilisateur actuel dans un élément <details> pour une meilleure lisibilité #}
     <details>
         <summary>{{ user }}</summary>
         <table class="table">
@@ -67,10 +63,10 @@
                     <th scope="col">Enjeu EFC</th>
                     <th scope="col">Enjeu EIT</th>
                     <th scope="col">Enjeu EC</th>
-                    <th scope="col">Total</th>
                 </tr>
             </thead>
             <tbody>
+                {# Boucle sur les scores de l'utilisateur actuel pour les afficher dans un tableau #}
                 {% for score in userScores %}
                     <tr>
                         <td>{{ score.user.email }}</td>
@@ -78,61 +74,12 @@
                         <td>{{ score.efc }} %</td>
                         <td>{{ score.eit }} %</td>
                         <td>{{ score.ec }} %</td>
-                        <td>{{ score.total }} %</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </details>
 {% endfor %}
-
-{#
-
-        <h1>Historique des Scores</h1>
-{% for score in scores %}
-    <details>
-        <summary>{{ score.user.email }}</summary>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Utilisateur</th>
-                    <th scope="col">Entreprise</th>
-                    <th scope="col">Enjeu EFC</th>
-                    <th scope="col">Enjeu EIT</th>
-                    <th scope="col">Enjeu EC</th>
-                    <th scope="col">Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% set user_scores = score.user %}
-                {% if user_scores|length > 1 %}
-                {{score.user}}
-                    {% for user_score in user_scores %}
-                        <tr>
-                            <td>{{ user_score.user.email }}</td>
-                            <td>{{ user_score.entreprise }}</td>
-                            <td>{{ user_score.efc }} %</td>
-                            <td>{{ user_score.eit }} %</td>
-                            <td>{{ user_score.ec }} %</td>
-                            <td>{{ user_score.total }} %</td>
-                        </tr>
-                    {% endfor %}
-                {% else %}
-                    <tr>
-                        <td>{{ score.user.email }}</td>
-                        <td>{{ score.entreprise }}</td>
-                        <td>{{ score.efc }} %</td>
-                        <td>{{ score.eit }} %</td>
-                        <td>{{ score.ec }} %</td>
-                        <td>{{ score.total }} %</td>
-                    </tr>
-                {% endif %}
-            </tbody>
-        </table>
-    </details>
-{% endfor %}
-#}
-
 {% endif %}
 {% endblock %}
 

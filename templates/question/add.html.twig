@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article{% endblock %}
+{% block title %}Ajout question{% endblock %}
 
 {% block content %}
 
     <div class="container center">
         <h1>Ajouter</h1>
-    {{ form(form) }}
+    {{ form(form) }} {# Appel du formulaire src/Form/QuestionAddTypeType.php #}
 
-<script>
-document.getElementById('question_add_enjeu_efc').addEventListener('input', function(e) {
-    if (e.target.value < 0) e.target.value = 0;
+{# EFC/EIT ou EC ne dois pas etre negatif #}
+<script> 
+document.getElementById('question_add_enjeu_efc').addEventListener('input', function(e) { 
+    if (e.target.value < 0) e.target.value = 0; 
 });
 document.getElementById('question_add_enjeu_eit').addEventListener('input', function(e) {
     if (e.target.value < 0) e.target.value = 0;
@@ -19,9 +20,6 @@ document.getElementById('question_add_enjeu_ec').addEventListener('input', funct
     if (e.target.value < 0) e.target.value = 0;
 });
 </script>
-
-
-
     </div>    
 
 {% endblock %}
